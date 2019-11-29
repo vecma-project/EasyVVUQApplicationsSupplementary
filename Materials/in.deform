@@ -1,0 +1,204 @@
+#Initialization
+
+units		real			  # default
+atom_style	full			  # molecular + charge (for bio-molecules)
+dimension	3			  # default
+boundary 	p p p
+
+#Building of pairwise neighbor lists
+
+neighbor 	2.0 bin
+neigh_modify	every 1 delay 5 check yes
+
+#Interactions
+
+kspace_style    pppm 0.0001		  # Define long-range solver to use each timestep
+		     			  # to compute long-range Coulombic interactions.
+					  # arg = accuracy / desired relative error in forces
+pair_style      lj/cut/coul/long 12.0 9.0 # Formula to compute pairwise interactions (defined
+				      	  # between pairs of atoms within a cutoff distance; changes
+					  # over time):
+				      	  # LJ with long-range Coulombics
+				      	  # arg1 = global cutoff for LJ (distance units)
+					  # arg2 = global cutoff for Coulombic (distance units)
+bond_style      harmonic		  # Formula to compute bond interactions. Remain in force
+					  # for the duration of the simulation. Read from file.
+angle_style     harmonic		  # Formula to compute angle interactions. Remain in force
+					  # for the duration of the simulation. Read from file.
+dihedral_style opls			  # Formula to compute dihedral interactions between
+	       				  # quadruplets of atoms. Remain in force for the duration
+					  # of the simulation.
+improper_style harmonic			  # Formula to compute improper interactions between
+	       				  # quadruplets.
+special_bonds lj/coul 0.0 0.0 1.0         #???
+
+#Input file
+
+read_data @source_path/@box_size/@structure_no/@replica_no.data
+#read_dump dump.lammpstrj 1000000 x y z vx vy vz
+
+variable L0 equal "1x"
+variable xstress equal "-pxx"
+variable ystress equal "-pyy"
+variable zstress equal "-pzz"
+
+#dump 1 all custom 100000 dumpX.lammpstrj id type xs ys zs vx vy vz
+
+#Thermodynamic data
+
+thermo 1
+thermo_style custom step lx ly lz v_xstress v_ystress v_zstress temp ke pe press
+
+timestep 2
+fix   shak all shake 0.001 20 1000 m 1.0
+
+variable rate equal 0.000001
+
+fix 1 all npt temp 300 300 100 y 1 1 100 z 1 1 100
+run 50000
+
+fix 2 all deform 1 x erate ${rate} units box remap x
+run 2500
+
+unfix 2
+run 50000
+
+write_data deformX.data
+
+clear
+###################################################################################
+#Initialization
+
+units		real			  # default
+atom_style	full			  # molecular + charge (for bio-molecules)
+dimension	3			  # default
+boundary 	p p p
+
+#Building of pairwise neighbor lists
+
+neighbor 	2.0 bin
+neigh_modify	every 1 delay 5 check yes
+
+#Interactions
+
+kspace_style    pppm 0.0001		  # Define long-range solver to use each timestep
+		     			  # to compute long-range Coulombic interactions.
+					  # arg = accuracy / desired relative error in forces
+pair_style      lj/cut/coul/long 12.0 9.0 # Formula to compute pairwise interactions (defined
+				      	  # between pairs of atoms within a cutoff distance; changes
+					  # over time):
+				      	  # LJ with long-range Coulombics
+				      	  # arg1 = global cutoff for LJ (distance units)
+					  # arg2 = global cutoff for Coulombic (distance units)
+bond_style      harmonic		  # Formula to compute bond interactions. Remain in force
+					  # for the duration of the simulation. Read from file.
+angle_style     harmonic		  # Formula to compute angle interactions. Remain in force
+					  # for the duration of the simulation. Read from file.
+dihedral_style opls			  # Formula to compute dihedral interactions between
+	       				  # quadruplets of atoms. Remain in force for the duration
+					  # of the simulation.
+improper_style harmonic			  # Formula to compute improper interactions between
+	       				  # quadruplets.
+special_bonds lj/coul 0.0 0.0 1.0         #???
+
+#Input file
+
+read_data @source_path/@box_size/@structure_no/@replica_no.data
+#read_dump dump.lammpstrj 1000000 x y z vx vy vz
+
+variable L0 equal "1x"
+variable xstress equal "-pxx"
+variable ystress equal "-pyy"
+variable zstress equal "-pzz"
+
+#dump 1 all custom 100000 dumpX.lammpstrj id type xs ys zs vx vy vz
+
+#Thermodynamic data
+
+thermo 1
+thermo_style custom step lx ly lz v_xstress v_ystress v_zstress temp ke pe press
+
+timestep 2
+fix   shak all shake 0.001 20 1000 m 1.0
+
+variable rate equal 0.000001
+
+fix 1 all npt temp 300 300 100 x 1 1 100 z 1 1 100
+run 50000
+
+fix 2 all deform 1 y erate ${rate} units box remap x
+run 2500
+
+unfix 2
+run 50000
+
+write_data deformY.data
+
+clear
+###################################################################################
+#Initialization
+
+units		real			  # default
+atom_style	full			  # molecular + charge (for bio-molecules)
+dimension	3			  # default
+boundary 	p p p
+
+#Building of pairwise neighbor lists
+
+neighbor 	2.0 bin
+neigh_modify	every 1 delay 5 check yes
+
+#Interactions
+
+kspace_style    pppm 0.0001		  # Define long-range solver to use each timestep
+		     			  # to compute long-range Coulombic interactions.
+					  # arg = accuracy / desired relative error in forces
+pair_style      lj/cut/coul/long 12.0 9.0 # Formula to compute pairwise interactions (defined
+				      	  # between pairs of atoms within a cutoff distance; changes
+					  # over time):
+				      	  # LJ with long-range Coulombics
+				      	  # arg1 = global cutoff for LJ (distance units)
+					  # arg2 = global cutoff for Coulombic (distance units)
+bond_style      harmonic		  # Formula to compute bond interactions. Remain in force
+					  # for the duration of the simulation. Read from file.
+angle_style     harmonic		  # Formula to compute angle interactions. Remain in force
+					  # for the duration of the simulation. Read from file.
+dihedral_style opls			  # Formula to compute dihedral interactions between
+	       				  # quadruplets of atoms. Remain in force for the duration
+					  # of the simulation.
+improper_style harmonic			  # Formula to compute improper interactions between
+	       				  # quadruplets.
+special_bonds lj/coul 0.0 0.0 1.0         #???
+
+#Input file
+
+read_data @source_path/@box_size/@structure_no/@replica_no.data
+#read_dump dump.lammpstrj 1000000 x y z vx vy vz
+
+variable L0 equal "1x"
+variable xstress equal "-pxx"
+variable ystress equal "-pyy"
+variable zstress equal "-pzz"
+
+#dump 1 all custom 100000 dumpX.lammpstrj id type xs ys zs vx vy vz
+
+#Thermodynamic data
+
+thermo 1
+thermo_style custom step lx ly lz v_xstress v_ystress v_zstress temp ke pe press
+
+timestep 2
+fix   shak all shake 0.001 20 1000 m 1.0
+
+variable rate equal 0.000001
+
+fix 1 all npt temp 300 300 100 x 1 1 100 y 1 1 100
+run 50000
+
+fix 2 all deform 1 z erate ${rate} units box remap x
+run 2500
+
+unfix 2
+run 50000
+
+write_data deformZ.data
