@@ -1,4 +1,6 @@
-## Before Usage:
+## Fusion application example
+
+#### Before usage:
 
 1. Install [EasyVVUQ](https://easyvvuq.readthedocs.io/en/latest/installation.html) library.
 2. Make sure that your have rights to access to external repositories of [MFW](https://github.com/vecma-ipp/MFW/tree/master/externals).
