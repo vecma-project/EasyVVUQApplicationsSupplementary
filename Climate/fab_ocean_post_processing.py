@@ -1,6 +1,6 @@
 """
 ===============================================================================
-SCRIPT FOR POSPROCESSING THE SAMPLES WHICH WERE EXECUTED IN 
+SCRIPT FOR POSTPROCESSING THE SAMPLES WHICH WERE EXECUTED IN 
 fab_ocean_job_submission.py
 ===============================================================================
 """
