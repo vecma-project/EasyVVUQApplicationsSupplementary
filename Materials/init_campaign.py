@@ -25,7 +25,6 @@ __license__ = "LGPL"
 
 
 def init_materials(tmpdir):
-
     # Set up a fresh campaign called "cannon"
     my_campaign = uq.Campaign(name='materials', work_dir=tmpdir)
 
@@ -55,7 +54,7 @@ def init_materials(tmpdir):
 
     # Create an encoder, decoder and collater for the cannonsim app
     encoder = uq.encoders.GenericEncoder(
-        template_fname='in.deform',
+        template_fname='in.deform_template',
         delimiter='@',
         target_filename='in.deform')
     decoder = uq.decoders.SimpleCSV(

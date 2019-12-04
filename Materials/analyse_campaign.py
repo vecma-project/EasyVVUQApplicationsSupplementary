@@ -32,8 +32,7 @@ __license__ = "LGPL"
 
 def analyse(campaign):
     # Perform a bootstrap analysis on all the measured YMs grouped by box size
-    bootstrap = uq.analysis.EnsembleBoot(groupby=["box_size"],
-                                         qoi_cols=["Value"])
+    bootstrap = uq.analysis.EnsembleBoot(groupby=["box_size"],qoi_cols=["Value"])
     campaign.apply_analysis(bootstrap)
     print("bootstrap:\n", campaign.get_last_analysis())
     # Perform basic analysis on the entire campaign
@@ -41,15 +40,16 @@ def analyse(campaign):
     campaign.apply_analysis(basicstats)
     print("stats:\n", campaign.get_last_analysis())
 
-    # Retrive the results DataFrame so we can manipulate here
+     # Retrieve the results DataFrame so we can manipulate here
     results = campaign.get_collation_result()[["box_size","structure_no","Value"]]
-    total_var = results.groupby("box_size").var()["Value"]
-    # Find the variance in the measured YMs for each unique polymer network: Var(YM|structure)
-    var_per_structure = results.groupby(["box_size","structure_no"]).var()
-    exp_var_given_struct = var_per_structure.groupby("box_size").mean()["Value"]
-    var_due_to_structure = total_var - exp_var_given_struct
+
+    total_var                 = results.groupby("box_size").var()["Value"]
+    var_per_structure         = results.groupby(["box_size","structure_no"]).var()
+    expected_var_given_struct = var_per_structure.groupby("box_size").mean()["Value"]
+    var_due_to_structure      = total_var - expected_var_given_struct
+
     print(pd.concat([total_var.rename('Var(YM)'),
-                     exp_var_given_struct.rename('E(Var(YM|structure))'),
+                     expected_var_given_struct.rename('E(Var(YM|structure))'),
                      var_due_to_structure.rename('Var(E(YM|structure))')],
                      axis=1))
 

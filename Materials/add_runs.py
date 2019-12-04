@@ -34,7 +34,7 @@ def add_runs(tmpdir):
     # 11. Load state in new campaign object
     print("Reloading campaign...")
     reloaded_campaign = uq.Campaign(state_file="save_state.json", work_dir=tmpdir)
-    reloaded_campaign.collate()
+    #reloaded_campaign.collate()
     print(reloaded_campaign)
 
     sweep = {
@@ -52,9 +52,8 @@ def add_runs(tmpdir):
     reloaded_campaign.draw_samples()
     reloaded_campaign.populate_runs_dir()
 
-
     # save campaign state for later read in and analysis
     reloaded_campaign.save_state('save_state2.json')
 
 if __name__ == "__main__":
-    analyse_multisampler("/tmp/")
+    add_runs("/tmp/")
