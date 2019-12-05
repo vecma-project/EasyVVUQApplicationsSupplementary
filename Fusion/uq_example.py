@@ -108,7 +108,7 @@ encoder = uq.encoders.MultiEncoder(encoder_cpo, encoder_xml)
 params.update(params_cpo)
 vary.update(vary_cpo)
 
-# Create the encoder
+# Create the decoder
 output_filename = "ets_coreprof_out.cpo"
 decoder = CPODecoder(target_filename=output_filename,
                      cpo_name="coreprof",
@@ -117,7 +117,7 @@ decoder = CPODecoder(target_filename=output_filename,
 # Create a collation element for this campaign
 collater = uq.collate.AggregateSamples(average=False)
 
-# Add the ETS app (automatically set as current app)
+# Add the app (automatically set as current app)
 my_campaign.add_app(name=campaign_name,
                     params=params,
                     encoder=encoder,
