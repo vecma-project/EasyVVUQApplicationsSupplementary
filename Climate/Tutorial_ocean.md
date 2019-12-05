@@ -45,7 +45,7 @@ In the examples folder the script `examples/ocean_2D/sc/ocean.py` runs an EasyVV
 
 ![equation](https://latex.codecogs.com/gif.latex?%5Cnabla%5E2%5CPsi%20%3D%20%5Comega)
 
-The viscosities ![equation](https://latex.codecogs.com/gif.latex?%5Cnu) and ![equation](https://latex.codecogs.com/gif.latex?%5Cmu) are the uncertain parameters. Their values are computed in `ocean.py` by specifying a decay time, which is assigned a user-specified distribution. For illustration purposes, the ocean model just runs for a simulation time of 1 day to limit the runtime of a single sample. This can be easily extended by changing `t_end` in `examples/ocean_2D/sc/ocean.py`.
+The viscosities ![equation](https://latex.codecogs.com/gif.latex?%5Cnu) and ![equation](https://latex.codecogs.com/gif.latex?%5Cmu) are the uncertain parameters. Their values are computed in `ocean.py` by specifying a decay time, which is assigned a user-specified distribution. For illustration purposes, the ocean model just runs for a simulation time of 1 day to limit the runtime of a single sample. This can be easily extended by changing `t_end` in `ocean.py`.
 
 
 The first steps are exactly the same as for an EasyVVUQ campaign that does not use FabSim to execute the runs:
@@ -85,7 +85,7 @@ The first steps are exactly the same as for an EasyVVUQ campaign that does not u
 
 2. (continued) Here, the mean values are the decay times in days.
 
-3. Create an encoder, decoder and collation element. The encoder links the template file to EasyVVUQ and defines the name of the input file (`ocean_in.json`). The model `examples/ocean_2D/sc/ocean.py` writes the total energy (`E`) to a simple `.csv` file, hence we select the `SimpleCSV` decoder, where in this case we have a single output column:
+3. Create an encoder, decoder and collation element. The encoder links the template file to EasyVVUQ and defines the name of the input file (`ocean_in.json`). The model `ocean.py` writes the first two (time-averaged) moments of the energy (`E`) and enstrophy (`Z`) to a simple `.csv` file, hence we select the `SimpleCSV` decoder, where in this case we have a single output column:
 ```python
     encoder = uq.encoders.GenericEncoder(
         template_fname = HOME + '/sc/ocean.template',
@@ -105,7 +105,7 @@ The first steps are exactly the same as for an EasyVVUQ campaign that does not u
                         encoder=encoder,
                         decoder=decoder,
                         collator=collator)
- ```
+  ```
  
  4. Now we have to select a sampler, in this case we use the SC sampler:
  ```python
@@ -138,7 +138,7 @@ fab.get_uq_samples(my_campaign.campaign_dir, machine='localhost')
     my_campaign.apply_analysis(sc_analysis)
     results = my_campaign.get_last_analysis()
 ```
-7. (continued) The `results` dict contains the first 2 statistical moments and Sobol indices for every quantity of interest defined in `output_columns`. If the PCE sampler was used, `SCAnalysis` should be replaced with `PCEAnalysis`.
+7. (continued) The `results` dict contains the first 2 moments (in the stochastic space) and Sobol indices for every quantity of interest defined in `output_columns`. If the PCE sampler was used, `SCAnalysis` should be replaced with `PCEAnalysis`.
 
 ### Executing an ensemble job on a remote host
 
