@@ -1,5 +1,5 @@
 # FabUQCampaign 2D ocean model
-This tutorial runs 2D ocean model samples from a (local) ![EasyVVUQ](https://github.com/UCL-CCS/EasyVVUQ) campaign using ![FabSim3](https://github.com/djgroen/FabSim3) via the `campaign2ensemble` subroutine. Jobs can be executed locally or be sent to an HPC resource:
+This tutorial runs 2D ocean model samples from a (local) ![EasyVVUQ](https://github.com/UCL-CCS/EasyVVUQ) campaign using ![FabSim3](https://github.com/djgroen/FabSim3) via the `FabUQCampaign` plugin. Jobs can be executed locally or be sent to an HPC resource:
 
 ![](FabUQMap.png)
 
@@ -8,17 +8,23 @@ To install all dependencies, first follow the instructions in https://github.com
 
 ## Explanation of files
 
-+ The `FabUQCampaign` directory contains all files listed below. This directory is located at `<fab_home>/plugins/FabUQCampaign`, where `<fab_home>` is your FabSim3 home directory.
++ The `FabUQCampaign` directory contains the FabSim3 plugin used to execute the ensemble. This directory is located at `<fab_home>/plugins/FabUQCampaign`, where `<fab_home>` is your FabSim3 home directory.
 
 + `FabUQCampaign/FabUQCampaign.py`: contains the `run_UQ_sample` subroutine in which the job properties are specified, e.g. number of cores, memory, wall-time limit etc.
 
-+ `FabUQCampaign/examples/ocean_2D/*`: an example script, applying EasyVVUQ to a 2D ocean model. See the Detailed Example section below.
-
 + `FabUQCampaign/templates/ocean`: contains the command-line instruction to draw a single EasyVVUQ sample of the ocean model.
+
++ `EasyVVUQApplicationsSupplementary/Climate/fab_ocean_job_submission.py`: a script which contains all EasyVVUQ command up to the execution of the ensemble.
+
++ `EasyVVUQApplicationsSupplementary/Climate/fab_ocean_post_processing.py`: a script which handles the post-processing of the ensemble runs.
+
++ `EasyVVUQApplicationsSupplementary/Climate/sc/ocean.py`: the solver for the 2D ocean model. 
+
++ `EasyVVUQApplicationsSupplementary/Climate/sc/ocean.template`: the EasyVVUQ input template for the 2D ocean model. 
 
 ## Dependencies
 + The example below requires EasyVVUQ >= 0.3
-+ `FabUQCampaign/examples/ocean_2D/sc/ocean.py` requires ![h5py](https://github.com/h5py/h5py).
++ `EasyVVUQApplicationsSupplementary/Climate/sc/ocean.py` requires ![h5py](https://github.com/h5py/h5py).
 
 ## Detailed Examples
 
@@ -28,9 +34,9 @@ To install all dependencies, first follow the instructions in https://github.com
  
 `localhost:`
 
- &nbsp;&nbsp;&nbsp;&nbsp;`ocean_exec: "<fab_home>/plugins/FabUQCampaign/examples/ocean_2D/sc/ocean.py"`
+ &nbsp;&nbsp;&nbsp;&nbsp;`ocean_exec: "<home>/EasyVVUQApplicationsSupplementary/Climate/sc/ocean.py"`
 
-Here, `<fab_home>` is the same directory as specifed above.
+Here, `<home>` is the directory containing the supplementary EasyVVUQ applications.
 
 ### Executing an ensemble job on localhost
 In the examples folder the script `examples/ocean_2D/sc/ocean.py` runs an EasyVVUQ Stochastic Collocation (SC) campaign using FabSim3 for a 2D ocean model on a square domain with periodic boundary conditions. Essentially, the governing equations are the Navier-Stokes equations written in terms of the vorticity ![equation](https://latex.codecogs.com/gif.latex?%5Comega) and stream function ![equation](https://latex.codecogs.com/gif.latex?%5CPsi), plus an additional forcing term F:
