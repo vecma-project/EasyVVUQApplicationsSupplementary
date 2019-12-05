@@ -148,7 +148,7 @@ To run the example script on a remote host, the `machine` of the remote host mus
  fab.run_uq_ensemble(my_campaign.campaign_dir, script_name='ocean', machine='eagle_vecma')
 ```
 
-Ensure the host is defined in `machines.yml`, and the user login information and `$ocean_exec` in `deploy/machines_user.yml`. For the `eagle` machine, this will look similar to the following:
+Ensure the host is defined in `machines.yml`, and the user login information and `$ocean_exec` in `deploy/machines_user.yml`. As an example, in the case of the `eagle` machine, this will look similar to the following:
 ```
 eagle:
  username: "plg<your_username>"
