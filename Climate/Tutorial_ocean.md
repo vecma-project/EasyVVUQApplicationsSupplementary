@@ -85,7 +85,7 @@ The first steps are exactly the same as for an EasyVVUQ campaign that does not u
 
 2. (continued) Here, the mean values are the decay times in days.
 
-3. Create an encoder, decoder and collation element. The encoder links the template file to EasyVVUQ and defines the name of the input file (`ocean_in.json`). The model `ocean.py` writes the first two (time-averaged) moments of the energy (`E`) and enstrophy (`Z`) to a simple `.csv` file, hence we select the `SimpleCSV` decoder, where in this case we have a single output column:
+3. Create an encoder, decoder and collation element. The encoder links the template file to EasyVVUQ and defines the name of the input file (`ocean_in.json`). The model `ocean.py` writes the first two (time-averaged) moments of the energy (`E`) and enstrophy (`Z`) to a simple `.csv` file, hence we select the `SimpleCSV` decoder:
 ```python
     encoder = uq.encoders.GenericEncoder(
         template_fname = HOME + '/sc/ocean.template',
