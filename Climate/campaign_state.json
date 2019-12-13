@@ -1,0 +1,20 @@
+{
+    "db_location": "sqlite:////tmp/oceanh0b9xc86test.db",
+    "db_type": "sql",
+    "active_app": "sc",
+    "campaign_name": "ocean",
+    "campaign_dir": "oceanh0b9xc86",
+    "log": [
+        {
+            "element": {
+                "name": "sc_sampler",
+                "version": "0.4",
+                "category": "sampling"
+            },
+            "info": {
+                "num_added": 9,
+                "replicas": 1
+            }
+        }
+    ]
+}
