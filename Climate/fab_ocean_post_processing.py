@@ -39,7 +39,7 @@ def post_proc(state_file, work_dir):
     print('========================================================')
     
     #get sampler and output columns from my_campaign object
-    my_sampler = my_campaign._active_sampler
+    my_sampler = my_campaign.get_active_sampler()
     output_columns = my_campaign._active_app_decoder.output_columns
     
     #fetch the results from the (remote) host via FabSim3

@@ -60,7 +60,7 @@ def init_materials(tmpdir):
     decoder = uq.decoders.SimpleCSV(
         target_filename='out.dat', output_columns=[
             'X', 'Y', 'Z'], header=0)
-    collater = uq.collate.AggregateSamples(average=False)
+    collater = uq.collate.AggregateByVariables()
 
     # Add the cannonsim app
     my_campaign.add_app(name="lammps_box",

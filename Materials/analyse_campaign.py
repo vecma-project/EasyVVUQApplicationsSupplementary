@@ -90,9 +90,6 @@ if __name__ == "__main__":
     print("Reloading campaign...")
     reloaded_campaign = uq.Campaign(state_file="save_state2.json", work_dir="/tmp/")
     reloaded_campaign.collate()
-    # Change the format of the results output so all measured YMs are in the one
-    # column called 'Value'
-    reloaded_campaign.set_collated_dataframe_format('one_row_per_var')
 
     analyse(reloaded_campaign)
     make_files_for_graphs(reloaded_campaign)
