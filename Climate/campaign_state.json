@@ -1,9 +1,9 @@
 {
-    "db_location": "sqlite:////tmp/oceanh0b9xc86test.db",
+    "db_location": "sqlite:////tmp/ocean8j9q58gvtest.db",
     "db_type": "sql",
     "active_app": "sc",
     "campaign_name": "ocean",
-    "campaign_dir": "oceanh0b9xc86",
+    "campaign_dir": "ocean8j9q58gv",
     "log": [
         {
             "element": {
@@ -12,7 +12,7 @@
                 "category": "sampling"
             },
             "info": {
-                "num_added": 9,
+                "num_added": 4,
                 "replicas": 1
             }
         }

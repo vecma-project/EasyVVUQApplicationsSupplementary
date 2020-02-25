@@ -199,7 +199,7 @@ mu = 1.0/(day*decay_time_mu)
 
 #start, end time (in days) + time step
 t = 0.0*day
-t_end = t + 5*day
+t_end = t + 2*day
 #initial time period during which no data is stored
 t_burn = 0.0*day
 dt = 0.01
